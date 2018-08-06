@@ -11,13 +11,9 @@ import ru.yahw.elbekd.financetracker.domain.repository.TransactionRepo
 import ru.yahw.elbekd.financetracker.domain.repository.WalletRepo
 import javax.inject.Inject
 
-/**
- * Created by Elbek D. on 29.07.2018.
- */
-class TransactionViewModel @Inject constructor(
-        private val walletRepo: WalletRepo,
-        private val transactionRepo: TransactionRepo,
-        private val categoryRepo: CategoryRepo) : ViewModel() {
+class PeriodicOperationVM @Inject constructor(private val walletRepo: WalletRepo,
+                                              private val transactionRepo: TransactionRepo,
+                                              private val categoryRepo: CategoryRepo) : ViewModel() {
 
     private val transactionWallet = MutableLiveData<String>()
 
@@ -31,8 +27,11 @@ class TransactionViewModel @Inject constructor(
     }
 
     fun getCurrenciesType() = walletRepo.getCurrenciesType()
+
     fun getWalletsNames() = walletRepo.getWalletsNames()
+
     fun getAvailableCategories() = categoryRepo.categories()
+    fun getTimeTypes() = walletRepo.getTimeTypes()
 
     fun commitTransaction(t: TransactionData) = transactionRepo.commitTransaction(t)
 }
