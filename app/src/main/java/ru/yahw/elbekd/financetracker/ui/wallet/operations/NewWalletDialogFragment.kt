@@ -17,7 +17,6 @@ class NewWalletDialogFragment : BaseDialog<NewWalletViewModel>(), Injectable {
     companion object {
         private val nameWalletRegex = """^\w+$""".toRegex()
         fun newInstance() = NewWalletDialogFragment()
-        val TAG = NewWalletDialogFragment::class.java.simpleName
     }
 
     private lateinit var vm: NewWalletViewModel
@@ -95,10 +94,11 @@ class NewWalletDialogFragment : BaseDialog<NewWalletViewModel>(), Injectable {
         val walletName = dialogView.findViewById<EditText>(R.id.input_wallet_name).text!!.toString()
         val radioButtonCheck = dialogView.findViewById<RadioGroup>(R.id.operation_type).checkedRadioButtonId == R.id.credit
         val valuteType = dialogView.findViewById<Spinner>(R.id.spinner_currency_type).selectedItem.toString()
-        if (radioButtonCheck) {
-            walletType = dialogView.findViewById<RadioButton>(R.id.credit).text.toString()
+
+        walletType = if (radioButtonCheck) {
+            dialogView.findViewById<RadioButton>(R.id.credit).text.toString()
         } else {
-            walletType = dialogView.findViewById<RadioButton>(R.id.wallet).text.toString()
+            dialogView.findViewById<RadioButton>(R.id.wallet).text.toString()
         }
         return WalletData(walletName, walletType, valuteType, "")
     }

@@ -1,6 +1,5 @@
 package ru.yahw.elbekd.financetracker.data.db.entities
 
-import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Relation
 

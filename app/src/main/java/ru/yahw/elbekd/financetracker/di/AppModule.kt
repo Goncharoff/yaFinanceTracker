@@ -38,7 +38,7 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideWalletRepo(remoteApi: RemoteApi, application: Application) = WalletRepo(remoteApi, application)
+    fun provideWalletRepo(remoteApi: RemoteApi, application: Application) = WalletRepo(application)
 
 
 

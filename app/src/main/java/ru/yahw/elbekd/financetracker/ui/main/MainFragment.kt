@@ -1,6 +1,5 @@
 package ru.yahw.elbekd.financetracker.ui.main
 
-import android.app.ActionBar
 import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v4.app.Fragment

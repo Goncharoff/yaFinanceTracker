@@ -1,11 +1,9 @@
 package ru.yahw.elbekd.financetracker
 
 import android.app.Application
-import androidx.work.Data
 import androidx.work.Worker
 import ru.yahw.elbekd.financetracker.data.db.entities.TransactionData
 import ru.yahw.elbekd.financetracker.domain.repository.TransactionRepo
-import java.math.BigDecimal
 
 class PeriodicSqlRequest : Worker() {
     val transactionRepo: TransactionRepo = TransactionRepo(Application())

@@ -12,20 +12,16 @@ import android.widget.*
 import androidx.work.*
 import ru.yahw.elbekd.financetracker.PeriodicSqlRequest
 import ru.yahw.elbekd.financetracker.R
-import ru.yahw.elbekd.financetracker.data.db.entities.TransactionData
 import ru.yahw.elbekd.financetracker.di.Injectable
 import ru.yahw.elbekd.financetracker.ui.base.BaseDialog
 import ru.yahw.elbekd.financetracker.utils.makeNegative
 import java.math.BigDecimal
-import java.text.DateFormat
-import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class PeriodicOperationFragment() : BaseDialog<PeriodicOperationVM>(), Injectable {
+class PeriodicOperationFragment : BaseDialog<PeriodicOperationVM>(), Injectable {
     companion object {
         private val amountRegex = """^\d+(\.\d*)?$""".toRegex()
-        val TAG = TransactionDialogFragment::class.java.simpleName
         fun newInstance() = PeriodicOperationFragment()
     }
 
@@ -112,11 +108,7 @@ class PeriodicOperationFragment() : BaseDialog<PeriodicOperationVM>(), Injectabl
         }
     }
 
-    private fun setupCurrency(v: View) {
-        vm.transactionCurrency.observe(this, Observer {
-            it?.let { v.findViewById<TextView>(R.id.tv_transaction_currency).text = it.mauinCurrency }
-        })
-    }
+
 
     private fun gatherTransaction(): Data {
         val type = dialogView.findViewById<Spinner>(R.id.spinner_category).selectedItem.toString()
@@ -138,7 +130,12 @@ class PeriodicOperationFragment() : BaseDialog<PeriodicOperationVM>(), Injectabl
     }
 
     private fun setupWorkManager() {
-        val sqlWorkBuilder = PeriodicWorkRequest.Builder(PeriodicSqlRequest::class.java, 15, TimeUnit.MINUTES)
+        var chosenDate: Long = 7
+        if (dialogView.findViewById<Spinner>(R.id.spinner_wallets).selectedItem.toString() == "Month") {
+            chosenDate = 30
+        }
+
+        val sqlWorkBuilder = PeriodicWorkRequest.Builder(PeriodicSqlRequest::class.java, chosenDate, TimeUnit.DAYS)
                 .setInputData(gatherTransaction())
                 .build()
 

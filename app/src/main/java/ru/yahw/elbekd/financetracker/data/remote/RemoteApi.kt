@@ -2,6 +2,7 @@ package ru.yahw.elbekd.financetracker.data.remote
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
+import android.util.Log
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
@@ -24,12 +25,13 @@ class RemoteApi @Inject constructor(private val client: OkHttpClient) : Currency
 
         client.newCall(req).enqueue(object : Callback {
             override fun onFailure(call: Call?, e: IOException?) {
+                Log.d("currency network error", e.toString())
             }
 
             override fun onResponse(call: Call?, response: Response?) {
                 response?.let {
-                    it.body()?.let {
-                        val obj = JSONObject(it.string())
+                    it.body()?.let {response ->
+                        val obj = JSONObject(response.string())
                         val rate = obj.getDouble("${from}_$to")
                         res.postValue(rate)
                     }
