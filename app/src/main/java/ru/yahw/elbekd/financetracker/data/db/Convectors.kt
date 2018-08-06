@@ -3,7 +3,7 @@ package ru.yahw.elbekd.financetracker.data.db
 import android.arch.persistence.room.TypeConverter
 import java.math.BigDecimal
 
-class Convecters {
+class Convectors {
     @TypeConverter
     fun fromBigDecimal(value: BigDecimal): Long? {
         return value.longValueExact()

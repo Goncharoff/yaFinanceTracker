@@ -12,11 +12,10 @@ import ru.yahw.elbekd.financetracker.data.db.daos.TransactionDataDao
 import ru.yahw.elbekd.financetracker.data.db.daos.WalletDataDao
 import ru.yahw.elbekd.financetracker.data.db.entities.TransactionData
 import ru.yahw.elbekd.financetracker.data.db.entities.WalletData
-import ru.yahw.elbekd.financetracker.domain.model.Wallet
 
 //TODO remake start wallet screen
 @Database(entities = arrayOf(WalletData::class, TransactionData::class), version = 1)
-@TypeConverters(Convecters::class)
+@TypeConverters(Convectors::class)
 abstract class WalletDataBase : RoomDatabase() {
 
 
@@ -24,7 +23,7 @@ abstract class WalletDataBase : RoomDatabase() {
     abstract fun transactionDataDao(): TransactionDataDao
 
     companion object {
-        private val DB_NAME = "wallet.db"
+        val DB_NAME = "wallet.db"
 
         val stubWallets = WalletData("Cash", "Cash", "RUB", "250")
 

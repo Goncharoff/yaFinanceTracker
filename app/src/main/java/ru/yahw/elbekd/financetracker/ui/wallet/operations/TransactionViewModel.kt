@@ -6,8 +6,6 @@ import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import ru.yahw.elbekd.financetracker.data.db.entities.TransactionData
 import ru.yahw.elbekd.financetracker.data.db.entities.WalletData
-import ru.yahw.elbekd.financetracker.domain.model.Transaction
-import ru.yahw.elbekd.financetracker.domain.model.Wallet
 import ru.yahw.elbekd.financetracker.domain.repository.CategoryRepo
 import ru.yahw.elbekd.financetracker.domain.repository.TransactionRepo
 import ru.yahw.elbekd.financetracker.domain.repository.WalletRepo

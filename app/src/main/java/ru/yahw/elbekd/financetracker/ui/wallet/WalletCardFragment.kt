@@ -15,8 +15,6 @@ import ru.yahw.elbekd.financetracker.R
 import ru.yahw.elbekd.financetracker.data.db.entities.TransactionData
 import ru.yahw.elbekd.financetracker.data.db.entities.WalletData
 import ru.yahw.elbekd.financetracker.di.Injectable
-import ru.yahw.elbekd.financetracker.domain.model.Transaction
-import ru.yahw.elbekd.financetracker.domain.model.Wallet
 import ru.yahw.elbekd.financetracker.ui.base.BaseFragment
 import ru.yahw.elbekd.financetracker.utils.formatDecimalNumber
 
@@ -47,8 +45,6 @@ class WalletCardFragment : BaseFragment<WalletViewModel>(), Injectable {
     private fun bindWallet(v: View, wallet: WalletData) {
         account_title.text = wallet.walletName
         tv_main_currency_name.text = wallet.mauinCurrency
-        //depricated
-//        tv_secondary_currency_name.text = wallet.secondaryCurrency
 
         vm.getWalletTransactions(wallet.walletName).observe(this, Observer {
             it?.let {
@@ -58,24 +54,8 @@ class WalletCardFragment : BaseFragment<WalletViewModel>(), Injectable {
                 setupPieChart(v, it)
             }
         })
-
-        //setupCurrency(wallet)
     }
 
-    /* depricated curency change
-    private fun setupCurrency(w: Wallet)   {
-        vm.convertCurrency(w.mainCurrency).observe(this, Observer { rate ->
-            rate?.let {
-                tv_current_currency
-                        .text = getString(R.string.template_currency)
-                        .format(w.mainCurrency, formatDecimalNumber(rate))
-
-                tv_secondary_currency_value
-                        .text = formatDecimalNumber(tv_main_currency_value.text.toString().toDouble() * rate)
-            }
-        })
-    }
-*/
     private fun setupPieChart(v: View, transactions: List<TransactionData>) {
         val expenses = transactions.filter { it.amount.toFloat() < 0 }
         val overallAmount = expenses.asSequence().map { -it.amount.toFloat() }.sum()

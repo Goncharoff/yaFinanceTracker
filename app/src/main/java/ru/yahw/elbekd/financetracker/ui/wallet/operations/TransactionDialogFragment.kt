@@ -15,7 +15,6 @@ import androidx.work.Data
 import ru.yahw.elbekd.financetracker.R
 import ru.yahw.elbekd.financetracker.data.db.entities.TransactionData
 import ru.yahw.elbekd.financetracker.di.Injectable
-import ru.yahw.elbekd.financetracker.domain.model.Transaction
 import ru.yahw.elbekd.financetracker.ui.base.BaseDialog
 import ru.yahw.elbekd.financetracker.utils.makeNegative
 import java.math.BigDecimal
