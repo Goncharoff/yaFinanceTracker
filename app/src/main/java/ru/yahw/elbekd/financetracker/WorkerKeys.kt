@@ -3,17 +3,16 @@ package ru.yahw.elbekd.financetracker
 class WorkerKeys {
     companion object {
 
-        val WALLET_NAME_KEY = "walletName"
+        const val WALLET_NAME_KEY: String = "walletName"
 
-        val DATE_KEY = "date"
+        const val DATE_KEY: String = "date"
 
-        val AMOUNT_KEY = "amount"
+        const val AMOUNT_KEY: String = "amount"
 
-        val TYPE_KEY = "type"
+        const val TYPE_KEY: String = "type"
 
-        val WALLET_CURRENCY_KEY = "walletCurrency"
+        const val WALLET_CURRENCY_KEY: String = "walletCurrency"
 
-        val CHOOSEN_DATE_KEY = "chosenDate"
-
+        const val CHOOSEN_DATE_KEY: String = "chosenDate"
     }
 }

@@ -66,6 +66,7 @@ class TransactionDialogFragment : BaseDialog<TransactionViewModel>(), Injectable
         }
         dialogView = view
         setupViews(view)
+
         return transactionDialog
     }
 
@@ -141,7 +142,7 @@ class TransactionDialogFragment : BaseDialog<TransactionViewModel>(), Injectable
 
     private fun setupCurrency(v: View) {
         vm.transactionCurrency.observe(this, Observer {
-            it?.let { v.findViewById<TextView>(R.id.tv_transaction_currency).text = it.mauinCurrency }
+            it?.let { v.findViewById<TextView>(R.id.tv_transaction_currency).text = it.mainCurrency }
         })
     }
 
@@ -154,15 +155,6 @@ class TransactionDialogFragment : BaseDialog<TransactionViewModel>(), Injectable
         val amount = dialogView.findViewById<EditText>(R.id.input_amount).text!!.toString()
         val wallet = dialogView.findViewById<Spinner>(R.id.spinner_wallets).selectedItem.toString()
 
-        fun createData(): Data {
-            return Data.Builder()
-                    .putString("walletName", wallet)
-                    .putLong("date", date)
-                    .putLong("amount", BigDecimal(amount).makeNegative(!isNegative).longValueExact())
-                    .putString("type", type)
-                    .putString("walletCurrency", walletCurrency)
-                    .build()
-        }
 
         return TransactionData(wallet, date, BigDecimal(amount).makeNegative(!isNegative), type, walletCurrency)
     }

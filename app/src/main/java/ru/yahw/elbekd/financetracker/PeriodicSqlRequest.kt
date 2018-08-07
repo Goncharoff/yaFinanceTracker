@@ -12,7 +12,7 @@ class PeriodicSqlRequest : Worker() {
 
         val data = inputData
         val name = data.getString(WorkerKeys.WALLET_NAME_KEY)
-        val date = data.getLong(WorkerKeys.DATE_KEY, 0)
+        val date = data.getLong(WorkerKeys.DATE_KEY, 0L)
         val amount = data.getLong(WorkerKeys.AMOUNT_KEY, 0).toBigDecimal()
         val currency = data.getString(WorkerKeys.WALLET_CURRENCY_KEY)
         val type = data.getString(WorkerKeys.TYPE_KEY)

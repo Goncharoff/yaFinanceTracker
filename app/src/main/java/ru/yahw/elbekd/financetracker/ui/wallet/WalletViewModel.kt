@@ -1,6 +1,8 @@
 package ru.yahw.elbekd.financetracker.ui.wallet
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModel
+import ru.yahw.elbekd.financetracker.data.db.entities.TransactionData
 import ru.yahw.elbekd.financetracker.domain.repository.TransactionRepo
 import ru.yahw.elbekd.financetracker.domain.repository.WalletRepo
 import javax.inject.Inject

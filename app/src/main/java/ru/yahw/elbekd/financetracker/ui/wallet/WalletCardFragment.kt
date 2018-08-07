@@ -2,6 +2,8 @@ package ru.yahw.elbekd.financetracker.ui.wallet
 
 import android.arch.lifecycle.Observer
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,26 +13,26 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.utils.ColorTemplate
 import kotlinx.android.synthetic.main.cardview_wallet.*
+import kotlinx.android.synthetic.main.fragment_main.*
 import ru.yahw.elbekd.financetracker.R
+import ru.yahw.elbekd.financetracker.adapters.TransactionRVAdapter
 import ru.yahw.elbekd.financetracker.data.db.entities.TransactionData
 import ru.yahw.elbekd.financetracker.data.db.entities.WalletData
 import ru.yahw.elbekd.financetracker.di.Injectable
 import ru.yahw.elbekd.financetracker.ui.base.BaseFragment
 import ru.yahw.elbekd.financetracker.utils.formatDecimalNumber
 
-/**
- * Created by Elbek D. on 28.07.2018.
- */
+
 class WalletCardFragment : BaseFragment<WalletViewModel>(), Injectable {
     override fun getLayoutId() = R.layout.cardview_wallet
 
     companion object {
-        val TAG = WalletCardFragment::class.java.simpleName
         const val WALLET_NAME_EXTRA = "WALLET_NAME"
         fun newInstance(args: Bundle) = WalletCardFragment().apply { arguments = args }
     }
 
     private lateinit var vm: WalletViewModel
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         vm = getViewModel()
@@ -39,12 +41,13 @@ class WalletCardFragment : BaseFragment<WalletViewModel>(), Injectable {
         vm.getWalletByName(arguments!!.getString(WALLET_NAME_EXTRA, "unknown"))
                 .observe(this, Observer { wallet -> wallet?.let { bindWallet(v, it) } })
 
+
         return v
     }
 
     private fun bindWallet(v: View, wallet: WalletData) {
         account_title.text = wallet.walletName
-        tv_main_currency_name.text = wallet.mauinCurrency
+        tv_main_currency_name.text = wallet.mainCurrency
 
         vm.getWalletTransactions(wallet.walletName).observe(this, Observer {
             it?.let {
@@ -71,4 +74,6 @@ class WalletCardFragment : BaseFragment<WalletViewModel>(), Injectable {
             invalidate()
         }
     }
+
+
 }

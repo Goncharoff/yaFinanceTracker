@@ -29,7 +29,7 @@ versions.targetSdk = 28
 versions.compileSdk = 28
 
 // app dependencies
-versions.supportLibrary = "28.0.0-alpha3"
+versions.supportLibrary = "28.0.0-beta01"
 versions.constraintLayout = "1.1.2"
 
 // aac

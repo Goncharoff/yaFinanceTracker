@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -8,9 +10,14 @@
         android:id="@+id/cardview_wallet_pager"
         android:layout_width="match_parent"
         android:layout_height="230dp"
-        android:clipToPadding="false" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:clipToPadding="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!--TODO recycler view with latest 5 transactions-->
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -21,6 +28,8 @@
         android:layout_marginEnd="8dp"
         android:clickable="true"
         android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_add" />
 
     <android.support.design.widget.FloatingActionButton
@@ -30,16 +39,9 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_wallet" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_transaction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:fabSize="mini"
-        app:srcCompat="@drawable/ic_cash_usd" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_pereodic_transaction"
@@ -48,6 +50,30 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_pereodic_transaction" />
 
-</android.support.design.widget.CoordinatorLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_transaction"
+        android:layout_width="wrap_content"
+        android:layout_height="89dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_cash_usd" />
+
+    <android.support.v7.widget.RecyclerView
+
+        android:id="@+id/rv_transaction_list"
+        android:layout_width="342dp"
+        android:layout_height="413dp"
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardview_wallet_pager" />
+
+</android.support.constraint.ConstraintLayout>

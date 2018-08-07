@@ -5,7 +5,7 @@ import java.math.BigDecimal
 
 class Convectors {
     @TypeConverter
-    fun fromBigDecimal(value: BigDecimal): Long? {
+    fun fromBigDecimal(value: BigDecimal): Long {
         return value.longValueExact()
     }
 

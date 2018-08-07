@@ -38,6 +38,7 @@ dependencies {
     implementation "com.android.support.constraint:constraint-layout:$versions.constraintLayout"
     implementation "com.android.support:preference-v7:$versions.supportLibrary"
     implementation "com.android.support:support-v4:$versions.supportLibrary"
+    implementation "com.android.support:recyclerview-v7:$versions.supportLibrary"
 
     // aac
     implementation "android.arch.lifecycle:extensions:$versions.lifecycle"

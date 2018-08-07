@@ -3,8 +3,18 @@ package ru.yahw.elbekd.financetracker.ui.main
 import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.view.ViewPager
+import android.support.v7.preference.R.attr.min
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import kotlinx.android.synthetic.main.cardview_wallet.*
+import kotlinx.android.synthetic.main.cardview_wallet.view.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import ru.yahw.elbekd.financetracker.R
+import ru.yahw.elbekd.financetracker.adapters.TransactionRVAdapter
 import ru.yahw.elbekd.financetracker.di.Injectable
 import ru.yahw.elbekd.financetracker.ui.base.BaseFragment
 import ru.yahw.elbekd.financetracker.ui.wallet.WalletCardFragment
@@ -17,7 +27,9 @@ import ru.yahw.elbekd.financetracker.ui.wallet.operations.TransactionDialogFragm
  * Created by Elbek D. on 22.07.2018.
  */
 class MainFragment : BaseFragment<MainFragmentViewModel>(), Injectable {
-    private var isFABOpen: Boolean = false
+    private var isFABMenuOpen: Boolean = false
+
+    var rvTransactionAdapter: TransactionRVAdapter? = null
 
     companion object {
         val TAG: String = MainFragment::class.java.simpleName
@@ -45,15 +57,17 @@ class MainFragment : BaseFragment<MainFragmentViewModel>(), Injectable {
         setClickFabButtons()
     }
 
+
     override fun getLayoutId() = R.layout.fragment_main
 
     private fun setupFabButtons() = fab.setOnClickListener {
-        if (!isFABOpen) {
+        if (!isFABMenuOpen) {
             expandFAB()
         } else {
             closeFab()
         }
     }
+
 
     private fun setClickFabButtons() {
         fab_transaction.setOnClickListener { TransactionDialogFragment.newInstance().show(fragmentManager, null) }
@@ -62,18 +76,39 @@ class MainFragment : BaseFragment<MainFragmentViewModel>(), Injectable {
     }
 
     private fun expandFAB() {
-        isFABOpen = true
+        isFABMenuOpen = true
+
         fab_transaction.animate().translationY((-resources.getDimension(R.dimen.animate_fab_gravity_Y_115)))
         fab_add_wallet.animate().translationY((-resources.getDimension(R.dimen.animate_fab_gravity_Y_165)))
         fab_pereodic_transaction.animate().translationY(-resources.getDimension(R.dimen.animate_fab_gravity_Y_215))
     }
 
     private fun closeFab() {
-        isFABOpen = false
+        isFABMenuOpen = false
 
-        fab_transaction.animate().translationY(100f)
-        fab_add_wallet.animate().translationY(100f)
-        fab_pereodic_transaction.animate().translationY(100f)
+        fab_transaction.animate().translationY(resources.getDimension(R.dimen.animate_fab_gravity_Y_115))
+        fab_add_wallet.animate().translationY(resources.getDimension(R.dimen.animate_fab_gravity_Y_165))
+        fab_pereodic_transaction.animate().translationY(resources.getDimension(R.dimen.animate_fab_gravity_Y_215))
+
 
     }
+
+
+    private fun setupTransactionRVAdapter(walletName: String) {
+
+        vm.getAllTransactionsByName(walletName).observe(this, Observer {
+
+            it?.let { list ->
+                if (rv_transaction_list.adapter == null) {
+                    rv_transaction_list.layoutManager = LinearLayoutManager(context)
+                    rvTransactionAdapter = TransactionRVAdapter(list.reversed().subList(0, minOf(5, list.size)), context)
+                    rv_transaction_list.adapter = rvTransactionAdapter
+                } else {
+                    rv_transaction_list.adapter!!.notifyDataSetChanged()
+                }
+
+            }
+        })
+    }
+
 }
