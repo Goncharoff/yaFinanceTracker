@@ -13,11 +13,11 @@ interface TransactionDataDao {
     fun selectAllTransactions(): LiveData<List<TransactionData>>
 
     @Query("SELECT * FROM transactionData WHERE wallet_name = :name")
-    fun selectTransactionByWalletName(name: String): LiveData<List<TransactionData>>
+    fun selectTransactionByWalletName(name: String): LiveData<MutableList<TransactionData>>
 
     @Insert(onConflict = REPLACE)
     fun insertTransaction(transactionData: TransactionData)
 
-    @Query("DELETE FROM transactionData")
-    fun deleteAllFromWallets()
+    @Query("DELETE FROM transactionData WHERE id = :id")
+    fun deleteAllFromWallets(id: Long)
 }

@@ -5,8 +5,9 @@ import android.arch.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
-import ru.yahw.elbekd.financetracker.ui.about.AboutViewModel
+import ru.yahw.elbekd.financetracker.ui.history.HistoryViewModel
 import ru.yahw.elbekd.financetracker.ui.main.MainFragmentViewModel
+import ru.yahw.elbekd.financetracker.ui.settings.SettingsViewModel
 import ru.yahw.elbekd.financetracker.ui.wallet.WalletViewModel
 import ru.yahw.elbekd.financetracker.ui.wallet.operations.NewWalletViewModel
 import ru.yahw.elbekd.financetracker.ui.wallet.operations.PeriodicOperationVM
@@ -21,8 +22,8 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @Singleton
-    @ViewModelKey(AboutViewModel::class)
-    abstract fun bindAboutVM(aboutVM: AboutViewModel): ViewModel
+    @ViewModelKey(HistoryViewModel::class)
+    abstract fun bindAboutVM(historyVM: HistoryViewModel): ViewModel
 
     @Binds
     @IntoMap
@@ -54,9 +55,15 @@ abstract class ViewModelModule {
     @ViewModelKey(PeriodicOperationVM::class)
     abstract fun bindPeriodicOperationVM(periodicOperationVM: PeriodicOperationVM): ViewModel
 
+    @Binds
+    @IntoMap
+    @Singleton
+    @ViewModelKey(SettingsViewModel::class)
+    abstract fun bindSettingsVM(settingsViewModel: SettingsViewModel) : ViewModel
 
     @Binds
     @Singleton
     abstract fun bindVMFactory(factory: ViewModelFactory): ViewModelProvider.Factory
+
 
 }

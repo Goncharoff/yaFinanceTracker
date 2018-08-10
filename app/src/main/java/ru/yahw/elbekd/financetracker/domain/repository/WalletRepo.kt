@@ -7,12 +7,14 @@ import io.reactivex.Completable
 import io.reactivex.schedulers.Schedulers
 import ru.yahw.elbekd.financetracker.data.db.WalletDataBase
 import ru.yahw.elbekd.financetracker.data.db.entities.WalletData
+import ru.yahw.elbekd.financetracker.data.remote.CurrencyApi
+import ru.yahw.elbekd.financetracker.data.remote.CurrencyCourseAPI
 import javax.inject.Inject
 
 /**
  * Created by Elbek D. on 29.07.2018.
  */
-class WalletRepo @Inject constructor(val application: Application) {
+class WalletRepo @Inject constructor(val application: Application, val currencyApi: CurrencyApi) {
 
     private val walletDataBase: WalletDataBase = WalletDataBase.getInstance(application)
 
@@ -34,6 +36,8 @@ class WalletRepo @Inject constructor(val application: Application) {
     fun getWalletsNames(): LiveData<List<String>> = walletDataBase.walletDataDao().selectAllWalletsName()
 
     fun getTimeTypes(): LiveData<List<String>> = MutableLiveData<List<String>>().apply { value = aviabileTime }
+
+    fun getExchangeRate(from: String, to: String) = currencyApi.convert(from, to)
 
     private companion object {
         val aviabileTime: List<String> = listOf("Week", "Month")

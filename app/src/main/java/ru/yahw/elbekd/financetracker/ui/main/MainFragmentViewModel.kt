@@ -15,18 +15,12 @@ class MainFragmentViewModel @Inject constructor(
         private val transactionRepo: TransactionRepo
 ) : ViewModel() {
 
-    companion object {
 
-    }
 
     private val allWallets: LiveData<List<WalletData>> = walletRepo.getAllWallets()
 
     fun getAllWallets(): LiveData<List<WalletData>> = allWallets
 
-    fun insertWallet(walletData: WalletData) = walletRepo.insertWallet(walletData)
 
-    fun getAllTransactionData() = transactionRepo.getAllTransactionData()
-
-    fun getAllTransactionsByName(name : String) = transactionRepo.getAllTransactionsByName(name)
 
 }

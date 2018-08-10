@@ -12,7 +12,11 @@ import android.text.format.DateUtils
 import android.view.View
 import android.widget.*
 import androidx.work.Data
+import kotlinx.android.synthetic.main.dialog_transaction.*
+import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.notification_template_lines_media.view.*
 import ru.yahw.elbekd.financetracker.R
+import ru.yahw.elbekd.financetracker.adapters.TransactionRVAdapter
 import ru.yahw.elbekd.financetracker.data.db.entities.TransactionData
 import ru.yahw.elbekd.financetracker.di.Injectable
 import ru.yahw.elbekd.financetracker.ui.base.BaseDialog
@@ -22,9 +26,6 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-/**
- * Created by Elbek D. on 28.07.2018.
- */
 class TransactionDialogFragment : BaseDialog<TransactionViewModel>(), Injectable {
     companion object {
         private val amountRegex = """^\d+(\.\d*)?$""".toRegex()
@@ -154,7 +155,6 @@ class TransactionDialogFragment : BaseDialog<TransactionViewModel>(), Injectable
         val isNegative = dialogView.findViewById<RadioGroup>(R.id.operation_type).checkedRadioButtonId == R.id.income
         val amount = dialogView.findViewById<EditText>(R.id.input_amount).text!!.toString()
         val wallet = dialogView.findViewById<Spinner>(R.id.spinner_wallets).selectedItem.toString()
-
 
         return TransactionData(wallet, date, BigDecimal(amount).makeNegative(!isNegative), type, walletCurrency)
     }
