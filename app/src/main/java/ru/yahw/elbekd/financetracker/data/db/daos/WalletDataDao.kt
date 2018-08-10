@@ -13,13 +13,13 @@ import ru.yahw.elbekd.financetracker.data.db.entities.WalletData
 @Dao
 interface WalletDataDao {
 
-    @Query("SELECT * from walletData")
+    @Query("SELECT * FROM walletData")
     fun getAllWalets(): LiveData<List<WalletData>>
 
     @Insert(onConflict = REPLACE)
     fun insertWallet(walletData: WalletData)
 
-    @Query("Delete from walletData")
+    @Query("DELETE FROM walletData")
     fun deleteAllFromWallets()
 
     @Query("SELECT wallet_name FROM walletData")

@@ -54,7 +54,7 @@ class PeriodicOperationFragment : BaseDialog<PeriodicOperationVM>(), Injectable 
     private fun setupViews(v: View) {
         setupAdapters(v)
     }
-
+    //TODO repeted obesrvers change
     private fun setupAdapters(v: View) {
         vm.getCurrenciesType().observe(this, Observer {
             it?.let {
