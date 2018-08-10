@@ -5,11 +5,8 @@ import androidx.work.WorkManager
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
-import ru.yahw.elbekd.financetracker.data.remote.CurrencyApi
-import ru.yahw.elbekd.financetracker.data.remote.CurrencyCourseAPI
 import ru.yahw.elbekd.financetracker.data.remote.RemoteApi
 import ru.yahw.elbekd.financetracker.domain.repository.CategoryRepo
-import ru.yahw.elbekd.financetracker.domain.repository.CurrencyInfoRepository
 import ru.yahw.elbekd.financetracker.domain.repository.TransactionRepo
 import ru.yahw.elbekd.financetracker.domain.repository.WalletRepo
 import javax.inject.Singleton
@@ -41,11 +38,8 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideWalletRepo(application: Application, remoteApi: RemoteApi) = WalletRepo(application, remoteApi)
+    fun provideWalletRepo(remoteApi: RemoteApi, application: Application) = WalletRepo(application)
 
-    @Singleton
-    @Provides
-    fun provideCurrency(currencyCourseAPI: CurrencyCourseAPI) = CurrencyInfoRepository(currencyCourseAPI)
 
 
 }

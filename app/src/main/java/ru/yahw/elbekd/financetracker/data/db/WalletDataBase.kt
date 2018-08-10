@@ -13,11 +13,8 @@ import ru.yahw.elbekd.financetracker.data.db.daos.WalletDataDao
 import ru.yahw.elbekd.financetracker.data.db.entities.TransactionData
 import ru.yahw.elbekd.financetracker.data.db.entities.WalletData
 
-const val DB_NAME = "wallet.db"
-
-val stubWallets = WalletData("Cash", "Cash", "RUB", "250")
-
-@Database(entities = [WalletData::class, TransactionData::class], version = 1)
+//TODO remake start wallet screen
+@Database(entities = arrayOf(WalletData::class, TransactionData::class), version = 1)
 @TypeConverters(Convectors::class)
 abstract class WalletDataBase : RoomDatabase() {
 
@@ -26,16 +23,22 @@ abstract class WalletDataBase : RoomDatabase() {
     abstract fun transactionDataDao(): TransactionDataDao
 
     companion object {
+        val DB_NAME = "wallet.db"
 
-        private var instance: WalletDataBase? = null
+        val stubWallets = WalletData("Cash", "Cash", "RUB", "250")
+
+
+        @Volatile
+        private var INSTANCE: WalletDataBase? = null
 
 
         fun getInstance(context: Context): WalletDataBase =
-                instance ?: synchronized(this) {
-                    instance ?: buildDatabase(context).also { instance = it }
+                INSTANCE ?: synchronized(this) {
+                    INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
                 }
 
-        fun buildDatabase(context: Context) =
+
+        private fun buildDatabase(context: Context) =
                 Room.databaseBuilder(context.applicationContext, WalletDataBase::class.java, DB_NAME)
                         .addCallback(object : Callback() {
                             override fun onCreate(db: SupportSQLiteDatabase) {
@@ -51,4 +54,3 @@ abstract class WalletDataBase : RoomDatabase() {
 
 
 }
-

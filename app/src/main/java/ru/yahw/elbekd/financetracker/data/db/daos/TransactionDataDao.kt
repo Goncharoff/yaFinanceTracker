@@ -9,15 +9,15 @@ import ru.yahw.elbekd.financetracker.data.db.entities.TransactionData
 
 @Dao
 interface TransactionDataDao {
-    @Query("SELECT * FROM transactionData")
+    @Query("SELECT * from transactionData")
     fun selectAllTransactions(): LiveData<List<TransactionData>>
 
     @Query("SELECT * FROM transactionData WHERE wallet_name = :name")
-    fun selectTransactionByWalletName(name: String): LiveData<MutableList<TransactionData>>
+    fun selectTransactionByWalletName(name: String): LiveData<List<TransactionData>>
 
     @Insert(onConflict = REPLACE)
     fun insertTransaction(transactionData: TransactionData)
 
-    @Query("DELETE FROM transactionData WHERE id = :id")
-    fun deleteAllFromWallets(id: Long)
+    @Query("Delete from transactionData")
+    fun deleteAllFromWallets()
 }

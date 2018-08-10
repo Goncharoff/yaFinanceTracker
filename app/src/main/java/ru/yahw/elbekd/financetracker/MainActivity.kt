@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_main.*
-import ru.yahw.elbekd.financetracker.ui.history.HistoryFragment
+import ru.yahw.elbekd.financetracker.ui.about.AboutFragment
 import ru.yahw.elbekd.financetracker.ui.main.MainFragment
 import ru.yahw.elbekd.financetracker.ui.settings.SettingsFragment
 import ru.yahw.elbekd.financetracker.utils.replace
@@ -33,11 +33,11 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                         SettingsFragment.TAG)
     }
 
-    private fun openHistory() {
+    private fun openAbout() {
         supportFragmentManager
                 .replace(R.id.container,
-                        HistoryFragment.newInstance(),
-                        HistoryFragment.TAG)
+                        AboutFragment.newInstance(),
+                        AboutFragment.TAG)
     }
 
     private fun openBalance() {
@@ -46,13 +46,12 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 MainFragment.TAG)
     }
 
-
     private fun setupBottomNavigation() {
         bottom_navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.balance -> openBalance()
                 R.id.settings -> openSettings()
-                R.id.history -> openHistory()
+                R.id.about -> openAbout()
             }
             true
         }

@@ -9,14 +9,14 @@ import java.math.BigDecimal
 
 @Entity(tableName = "transactionData")
 data class TransactionData(@ColumnInfo(name = "wallet_name") var walletName: String,
-                           @ColumnInfo(name = "date") var date: Long,
-                           @ColumnInfo(name = "amount") var amount: BigDecimal,
-                           @ColumnInfo(name = "currency") var currency: String,
-                           @ColumnInfo(name = "type") var type: String
+                              @ColumnInfo(name = "date") var date: Long,
+                              @ColumnInfo(name = "amount") var amount: BigDecimal,
+                              @ColumnInfo(name = "currency") var currency: String,
+                              @ColumnInfo(name = "type") var type: String
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Long? = null
 
     @Ignore
-    constructor() : this(walletName = "", date = 0, amount = BigDecimal.ZERO, currency = "", type = "")
+    constructor() : this("", 0, BigDecimal.ZERO, "", "")
 }

@@ -9,12 +9,12 @@ import android.arch.persistence.room.PrimaryKey
 data class WalletData(
         @ColumnInfo(name = "wallet_name") var walletName: String,
         @ColumnInfo(name = "type") var walletType: String,
-        @ColumnInfo(name = "main_currency") var mainCurrency: String,
+        @ColumnInfo(name = "main_currency") var mauinCurrency: String,
         @ColumnInfo(name = "sum") var sum: String) {
 
     @PrimaryKey(autoGenerate = true)
     var id: Long? = null
 
     @Ignore
-    constructor() : this(walletName = "", walletType = "", mainCurrency = "", sum = "")
+    constructor() : this("", "", "", "")
 }
